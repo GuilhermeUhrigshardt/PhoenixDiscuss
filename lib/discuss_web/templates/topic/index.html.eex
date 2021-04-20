@@ -1,6 +1,6 @@
 <h1>Listing Topics</h1>
 
-<table>
+<table class="striped highlight">
   <thead>
     <tr>
       <th>Title</th>
@@ -11,16 +11,24 @@
   <tbody>
 <%= for topic <- @topics do %>
     <tr>
-      <td><%= topic.title %></td>
+      <td><%= link "#{topic.title}", to: Routes.topic_path(@conn, :show, topic) %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.topic_path(@conn, :show, topic) %></span>
-        <span><%= link "Edit", to: Routes.topic_path(@conn, :edit, topic) %></span>
-        <span><%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <div class="right-align">
+          <!-- <span><%= link "Show", to: Routes.topic_path(@conn, :show, topic), class: "btn btn-primary light-green" %></span> %>-->
+          <span><%= link "Edit", to: Routes.topic_path(@conn, :edit, topic), class: "btn btn-primary light-blue" %></span>
+          <span><%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-primary red lighten-2" %></span>
+        </div>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Topic", to: Routes.topic_path(@conn, :new) %></span>
+<div class="fixed-action-btn">
+  <span>
+    <%= link to: Routes.topic_path(@conn, :new), class: "btn-floating btn-large waves-effect green" do %>
+      <i class="material-icons">add</i>
+    <% end %>
+  </span>
+</div>

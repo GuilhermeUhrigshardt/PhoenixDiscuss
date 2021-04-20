@@ -5,11 +5,12 @@
     </div>
   <% end %>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+  <div class="form-group">
+    <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+    <%= error_tag f, :title %>
 
-  <div>
-    <%= submit "Save" %>
+    <div>
+      <%= submit "Save", class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>
