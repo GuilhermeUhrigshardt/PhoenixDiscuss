@@ -3,10 +3,11 @@ defmodule Discuss.Discussion do
   The Discussion context.
   """
 
+  import Ecto
   import Ecto.Query, warn: false
   alias Discuss.Repo
-
   alias Discuss.Discussion.Topic
+  alias Discuss.Users.User
 
   @doc """
   Returns the list of topics.
@@ -42,15 +43,16 @@ defmodule Discuss.Discussion do
 
   ## Examples
 
-      iex> create_topic(%{field: value})
+      iex> create_topic(user, %{field: value})
       {:ok, %Topic{}}
 
-      iex> create_topic(%{field: bad_value})
+      iex> create_topic(user, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_topic(attrs \\ %{}) do
-    %Topic{}
+  def create_topic(%User{} = user, attrs \\ %{}) do
+    user
+    |> build_assoc(:topics)
     |> Topic.changeset(attrs)
     |> Repo.insert()
   end
